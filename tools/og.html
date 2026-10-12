@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>og image</title>
+<!-- Renders og.png (1200x630). From the project root, with a local server running on PORT:
+     node tools/shot.mjs http://localhost:PORT/tools/og.html og.png --width 1200 --height 630 --wait-for "window.ogReady" --settle 300 -->
+<link rel="stylesheet" href="../style.css">
+<style>
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; }
+  .copy { position: absolute; left: 72px; top: 0; bottom: 0; width: 470px; display: flex; flex-direction: column; justify-content: center; }
+  .copy h1 { font-size: 58px; margin: 22px 0 22px; max-width: none; }
+  .copy p:not(.label) { font: 21px/1.5 var(--sans); color: var(--ink2); margin: 0 0 34px; }
+  .copy .url { font: 500 18px var(--mono); color: var(--amber); }
+  .art { position: absolute; left: 590px; top: 46px; width: 760px; height: 760px; overflow: hidden; border: 1px solid var(--line); box-shadow: 0 30px 80px -20px rgba(0,0,0,.8); }
+  .art svg { display: block; width: 760px; height: auto; }
+  .fade { position: absolute; left: 590px; right: 0; bottom: 0; height: 120px; background: linear-gradient(transparent, var(--ground)); }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <p class="label">GitHub Lifelines</p>
+    <h1>Every repo, drawn as a line.</h1>
+    <p>Type a GitHub username. Get a poster of every public project, from its first day to its last push.</p>
+    <span class="url">pravin.github.io/lifelines</span>
+  </div>
+  <div class="art frame" id="art"></div>
+  <div class="fade"></div>
+<script src="../js/lifelines.js"></script>
+<script>
+  Promise.all([fetch("../sample.json").then(r => r.json()), document.fonts.load("500 13px 'IBM Plex Mono'")]).then(([d]) => {
+    const m = Lifelines.build(d, { now: Date.parse(d.fetchedAt), sample: true });
+    document.getElementById("art").innerHTML = Lifelines.render(m, { id: "og" }).svg;
+    requestAnimationFrame(() => { window.ogReady = true; });
+  });
+</script>
+</body>
+</html>

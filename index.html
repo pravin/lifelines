@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitHub Lifelines — every repo, drawn as a line</title>
+<meta name="description" content="Type a GitHub username and get a shareable poster of their public projects, each one a line from its first day to its last push.">
+<link rel="canonical" href="https://pravin.github.io/lifelines/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GitHub Lifelines">
+<meta property="og:title" content="GitHub Lifelines — every repo, drawn as a line">
+<meta property="og:description" content="Type a GitHub username, get a poster of every public project from its first day to its last push. Download it, share it.">
+<meta property="og:url" content="https://pravin.github.io/lifelines/">
+<meta property="og:image" content="https://pravin.github.io/lifelines/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A dark poster of GitHub projects drawn as coloured horizontal lines across the years.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="GitHub Lifelines — every repo, drawn as a line">
+<meta name="twitter:description" content="Type a GitHub username, get a poster of every public project from its first day to its last push.">
+<meta name="twitter:image" content="https://pravin.github.io/lifelines/og.png">
+<meta name="theme-color" content="#0b1220">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%230b1220'/><g stroke-width='3' stroke-linecap='round'><path d='M6 9h14' stroke='%23e8a33d'/><path d='M10 16h16' stroke='%235fa8bc'/><path d='M8 23h10' stroke='%23c25f9c'/></g></svg>">
+<link rel="preload" href="fonts/plex-mono-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="wrap top">
+  <a class="mark" href="./" aria-label="GitHub Lifelines home">
+    <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><g stroke-width="3" stroke-linecap="round"><path d="M6 9h14" stroke="#e8a33d"/><path d="M10 16h16" stroke="#5fa8bc"/><path d="M8 23h10" stroke="#c25f9c"/></g></svg>
+    <span>lifelines</span>
+  </a>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <p class="label">GitHub Lifelines</p>
+    <h1>Every repo you've made, drawn as a line.</h1>
+    <p class="pitch">Each project runs from the day it was created to its last push, coloured by language. Type a username and get a poster to download and share.</p>
+    <form id="form" class="search frame" autocomplete="off" role="search">
+      <label for="u" class="prefix">github.com/</label>
+      <input id="u" name="u" type="text" inputmode="text" autocapitalize="off" spellcheck="false" placeholder="username" maxlength="39" required aria-describedby="hint">
+      <button type="submit" class="btn">Draw <span aria-hidden="true">→</span></button>
+    </form>
+    <p id="hint" class="hint">Public data only, straight from GitHub's API to your browser. Try an example: <a href="?u=pravin" id="example">@pravin</a></p>
+  </section>
+
+  <section class="wrap result" aria-live="polite">
+    <div id="status" class="status" hidden></div>
+
+    <div id="toolbar" class="toolbar" hidden>
+      <div class="tb-left">
+        <label class="toggle"><input type="checkbox" id="forks"> <span>Include forks</span></label>
+        <button type="button" class="link-btn" id="listToggle" aria-expanded="false" aria-controls="list">View as list</button>
+      </div>
+      <div class="tb-right">
+        <button type="button" class="btn small" id="download">Download PNG</button>
+        <button type="button" class="ghost" id="share" hidden>Share…</button>
+        <a class="ghost" id="shareX" target="_blank" rel="noopener">Post on X</a>
+        <a class="ghost" id="shareLi" target="_blank" rel="noopener">LinkedIn</a>
+        <button type="button" class="ghost" id="copy">Copy link</button>
+      </div>
+    </div>
+
+    <div id="sampleTag" class="sample-tag" hidden><span class="label">Example poster</span> <span>— a snapshot of <a href="?u=pravin">@pravin</a>. Type any username above to draw yours.</span></div>
+
+    <figure class="poster-frame frame" id="frame">
+      <div class="poster-scroll" id="scroll" tabindex="-1">
+        <div id="poster" class="poster"></div>
+      </div>
+      <div id="tip" class="tip" role="tooltip" hidden></div>
+    </figure>
+    <p class="scroll-hint">Scroll sideways to see the whole poster, or use <b>View as list</b>.</p>
+
+    <div id="list" class="list frame" hidden></div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <span>Made by <a href="https://pravin.github.io">Pravin Paratey</a></span>
+  <span><a href="https://pravin.github.io/hollowmoon/">Play Hollowmoon</a> — a roguelike in your browser</span>
+  <span class="dim">Uses the public GitHub API. Nothing is stored on a server.</span>
+</footer>
+
+<script src="js/lifelines.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
